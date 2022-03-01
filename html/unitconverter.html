@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Unit Converter</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        #wrapper {
+            padding: 100px;
+            margin: 15% auto;
+            width: 700px;
+            border-radius: 50px;
+            background-color: rgb(148, 199, 195);
+            text-align: center;
+        }
+
+        body {
+            background-image: linear-gradient(to bottom right, rgba(79, 51, 176, 1.0), #009688);
+            height: 100vh;
+        }
+
+        .input {
+            display: block;
+            width: 195px;
+            height: 35px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid black;
+            cursor: pointer;
+            background-color: white;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #value {
+            display: block;
+            width: 180px;
+            height: 35px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid black;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            background-color: white;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #convert {
+            width: 190px;
+            height: 35px;
+            border: 2px solid black;
+            border-radius: 5px;
+            color: white;
+            background-color: rgb(152, 100, 237);
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        "use strict";
+        function convert() {
+            let initial = document.getElementById("initial").value;
+            let final = document.getElementById("final").value;
+            let value = document.getElementById("value").value;
+            let converted;
+            value = parseInt(value);
+
+            switch (initial) {
+                case "cm":
+                    if (final == "cm") converted = value;
+                    else if (final == "m") converted = value / 100;
+                    else converted = value / 100000;
+                    break;
+                case "m":
+                    if (final == "cm") converted = value * 100;
+                    else if (final == "m") converted = value;
+                    else converted = value / 1000;
+                    break;
+                case "km":
+                    if (final == "cm") converted = value * 100000;
+                    else if (final == "m") converted = value * 1000;
+                    else converted = value;
+                    break;
+            }
+
+            document.getElementById("result").innerHTML = value + " " + initial + " to " + final + " is equals to " + converted + " " + final;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h2>Unit Converter</h2>
+        <input type="text" id="value" placeholder="Value to convert in integer">
+        <select id="initial" class="input">
+            <option value="cm">centimeter(s)</option>
+            <option value="m">meter(s)</option>
+            <option value="km">kilometer(s)</option>
+        </select>
+        <p style="text-align: center;">to</p>
+        <select id="final" class="input">
+            <option value="cm">centimeter(s)</option>
+            <option value="m">meter(s)</option>
+            <option value="km">kilometer(s)</option>
+        </select>
+        <button onclick="convert()" id="convert">Convert</button>
+        <p id="result"></p>
+    </div>
+</body>
+
+</html>
